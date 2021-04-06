@@ -157,7 +157,14 @@ def extra_credit(filepath):
     Please see the instructions document for more information on how to complete this function.
     You do not have to write test cases for this function.
     """
-    pass
+    
+    fname = open(filepath, 'r')
+    fname.close()
+    soup = BeautifulSoup(fname, 'html.parser')
+    description = soup.find('div', class_ = 'readable stacked').find('span', id = 'freeText4791443123668479528').text
+    reg_ex = r'\b[A-Z][a-z]{3,}(?:\s[A-Z]\w+)+'
+    entities = re.findall(reg_ex, description)
+    return entities
 
 
 
